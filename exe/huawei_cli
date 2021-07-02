@@ -2,4 +2,13 @@
 
 require 'huawei_cli'
 
-puts "pouet"
+opt = ARGV.shift
+
+cnx = HuaweiCli::Connection.new('https://10.0.0.42')
+
+case opt
+when 'signal'
+  HuaweiCli::Cmd::Signal.new(cnx).run
+else
+  puts "Unknown command: #{opt}"
+end

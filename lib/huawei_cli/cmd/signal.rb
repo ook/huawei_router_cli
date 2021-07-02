@@ -8,6 +8,7 @@ module HuaweiCli
       end
 
       def run
+        jard
         @connection.get('')
       end
 

@@ -12,3 +12,5 @@ when 'signal'
 else
   puts "Unknown command: #{opt}"
 end
+
+cnx.close

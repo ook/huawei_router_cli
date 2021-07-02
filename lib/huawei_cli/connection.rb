@@ -7,11 +7,17 @@ module HuaweiCli
     end
 
     def get(path)
-      raise 'implement me please'
+      http.get(path)
     end
 
     def http
       @http ||= HTTP.persistent(@host)
     end
+
+    def close
+      @http.close if @http
+      @http = nil
+    end
+
   end
 end

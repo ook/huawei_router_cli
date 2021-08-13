@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
 
-require 'huawei_cli'
+require_relative '../lib/huawei_cli'
 
 opt = ARGV.shift
 
 cnx = HuaweiCli::Connection.new('https://10.0.0.42')
 
 case opt
+when 'ping'
+  HuaweiCli::Cmd::Ping.new(cnx).run
 when 'signal'
   HuaweiCli::Cmd::Signal.new(cnx).run
 else

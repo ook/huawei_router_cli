@@ -8,7 +8,15 @@ module HuaweiCli
       end
 
       def run
-        @connection.get('')
+        loop do
+          response = @connection.get('/api/device/signal')
+          @connection.followup_header(response)
+          # puts "\e[H\e[2J"
+          puts response.to_s
+          Ping.new(@connection).run
+          sleep(5)
+          puts
+        end
       end
 
     end

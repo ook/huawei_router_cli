@@ -2,17 +2,22 @@
 
 require_relative '../lib/huawei_cli'
 
-opt = ARGV.shift
+def fetch_cmd(cnx, opts)
+  opt = ARGV.shift
 
-cnx = HuaweiCli::Connection.new('https://10.0.0.42')
-
-case opt
-when 'ping'
-  HuaweiCli::Cmd::Ping.new(cnx).run
-when 'signal'
-  HuaweiCli::Cmd::Signal.new(cnx).run
-else
-  puts "Unknown command: #{opt}"
+  ret = case opt
+  when 'ping'
+    HuaweiCli::Cmd::Ping.new(cnx, ARGV)
+  when 'signal'
+    HuaweiCli::Cmd::Signal.new(cnx, ARGV)
+  when 'loop'
+    HuaweiCli::Cmd::Loop.new(cnx, ARGV)
+  else
+    puts "Unknown command: #{opt}"
+  end
+  ret
 end
 
+cnx = HuaweiCli::Connection.new('https://10.0.0.42')
+fetch_cmd(cnx, ARGV).run
 cnx.close

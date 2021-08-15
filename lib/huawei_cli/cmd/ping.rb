@@ -1,7 +1,7 @@
 module HuaweiCli
   module Cmd
     class Ping
-      def initialize(connection)
+      def initialize(connection, _opts)
         @connection = connection
       end
 

@@ -11,5 +11,5 @@ require_relative "huawei_cli/cmd/signal"
 module HuaweiCli
   class Error < StandardError; end
 
-  Connection.new(ENV['H_HOST'])
+  Connection.new(ENV['HC_ROUTER'])
 end

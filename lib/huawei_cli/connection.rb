@@ -30,18 +30,20 @@ module HuaweiCli
 
     def get(path, need_connection: true)
       if need_connection && !@connected
-        Login.new(self).run(password: ENV["HC_PWD"])
+        Login.new(self).run(password: ENV["HC_PASSWORD"])
         @connected = true
       end
       req = http
       req = req.cookies(@cookies) if @cookies
       req = req.headers(@headers) if @headers
+
+      # Huawei is totally broken, just can't verify it
       req.get(path, ssl_context: ssl_verify_none_ctx)
     end
 
     def post(path, need_connection: true, body: nil)
       if need_connection && !@connected
-        Login.new(self).run(password: ENV["HC_PWD"])
+        Login.new(self).run(password: ENV["HC_PASSWORD"])
         @connected = true
       end
       req = http.headers('content-type':'text/xml' )

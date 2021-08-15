@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
 
+require 'dotenv'
+
 require_relative '../lib/huawei_cli'
+
+Dotenv.load
 
 def fetch_cmd(cnx, opts)
   opt = ARGV.shift
@@ -18,6 +22,6 @@ def fetch_cmd(cnx, opts)
   ret
 end
 
-cnx = HuaweiCli::Connection.new('https://10.0.0.42')
+cnx = HuaweiCli::Connection.new(ENV['HC_ROUTER'])
 fetch_cmd(cnx, ARGV).run
 cnx.close
